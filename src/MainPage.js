@@ -71,7 +71,7 @@ function MainPage() {
     fetch('/shanice-birthday/images-collection.json')
       .then((response) => response.json())
       .then((data) => {
-        const imageUrls = data.images.map((image) => `/shanice-birthday/images/${image}`);
+        const imageUrls = data.images.map((image) => `/shanice-birthday/${image}`);
         setImages(imageUrls);
       })
       .catch((err) => console.error('Error fetching image names:', err));
