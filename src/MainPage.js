@@ -34,7 +34,7 @@ const NavLink = styled.a`
 const HeaderContainer = styled.header`
   position: relative;
   height: 100vh;
-  background-image: url('shanice-birthday/pexels-bence-kondor-1188017-2259917.jpg');
+  background-image: url('shanice-birthday/background.jpg');
   background-position: center;
   background-attachment: fixed;
   background-size: cover;
