@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/shanice-birthday/static/css/main.e6c13ad2.css",
-    "main.js": "/shanice-birthday/static/js/main.ca037cac.js",
+    "main.js": "/shanice-birthday/static/js/main.a1bd7a1c.js",
     "static/js/453.822f42cb.chunk.js": "/shanice-birthday/static/js/453.822f42cb.chunk.js",
     "index.html": "/shanice-birthday/index.html",
     "main.e6c13ad2.css.map": "/shanice-birthday/static/css/main.e6c13ad2.css.map",
-    "main.ca037cac.js.map": "/shanice-birthday/static/js/main.ca037cac.js.map",
+    "main.a1bd7a1c.js.map": "/shanice-birthday/static/js/main.a1bd7a1c.js.map",
     "453.822f42cb.chunk.js.map": "/shanice-birthday/static/js/453.822f42cb.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.ca037cac.js"
+    "static/js/main.a1bd7a1c.js"
   ]
 }
