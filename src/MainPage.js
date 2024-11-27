@@ -35,7 +35,7 @@ const NavLink = styled.a`
 const HeaderContainer = styled.header`
   position: relative;
   height: 100vh;
-  background-image: url('/shanice-birthday/background.jpg');
+  background-image: url('/background.jpg');
   background-position: center;
   background-attachment: fixed;
   background-size: cover;
@@ -69,10 +69,10 @@ function MainPage() {
   const [images, setImages] = useState([]);
 
   useEffect(() => {
-    fetch('/shanice-birthday/images-collection.json')
+    fetch('/images-collection.json')
       .then((response) => response.json())
       .then((data) => {
-        const imageUrls = data.images.map((image) => `/shanice-birthday/${image}`);
+        const imageUrls = data.images.map((image) => `/${image}`);
         setImages(imageUrls);
       })
       .catch((err) => console.error('Error fetching image names:', err));
@@ -80,7 +80,7 @@ function MainPage() {
 
   useEffect(() => {
     // Load the CSV and map the values
-    Papa.parse('/shanice-birthday/Wish Birthday Shan” (Responses) - Form responses 1.csv', {
+    Papa.parse('/Wish Birthday Shan” (Responses) - Form responses 1.csv', {
       download: true,
       header: true,
       complete: (result) => {

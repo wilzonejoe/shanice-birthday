@@ -1,7 +1,7 @@
 {
   "name": "birthday-app",
   "version": "0.1.0",
-  "homepage": "https://wilzonejoe.github.io/shanice-birthday",
+  "homepage": "https://wilzonejoe.github.io/",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",

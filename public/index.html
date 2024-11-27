@@ -29,9 +29,16 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <audio id="audio" loop autoplay> 
-      <source src="%PUBLIC_URL%/music.mp3" type="audio/mpeg">
-    </audio>
+    <script>
+       var source = "%PUBLIC_URL%/music.mp3"
+      var audio = document.createElement("audio");
+      audio.autoplay = true;
+      audio.load()
+      audio.addEventListener("load", function() { 
+          audio.play(); 
+      }, true);
+      audio.src = source;
+    </script>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
