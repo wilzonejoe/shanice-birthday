@@ -31,10 +31,11 @@ const NavLink = styled.a`
   }
 `;
 
+
 const HeaderContainer = styled.header`
   position: relative;
   height: 100vh;
-  background-image: url('shanice-birthday/background.jpg');
+  background-image: url('/background.jpg');
   background-position: center;
   background-attachment: fixed;
   background-size: cover;
