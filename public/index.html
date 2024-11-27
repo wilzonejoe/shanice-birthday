@@ -30,15 +30,33 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <script>
-       var source = "%PUBLIC_URL%/music.mp3"
+      var source = "%PUBLIC_URL%/music.mp3";
       var audio = document.createElement("audio");
-      audio.autoplay = true;
-      audio.load()
-      audio.addEventListener("load", function() { 
-          audio.play(); 
-      }, true);
       audio.src = source;
+      audio.autoplay = true; // This allows the browser to attempt autoplay
+      audio.loop = true;     // Optional: Loop the audio
+    
+      var hasPlayed = false; // Ensure audio plays only once 
+    
+      // Function to play audio on user interaction
+      function playAudioOnScroll() {
+        if (!hasPlayed && window.scrollY > 0) {
+          hasPlayed = true; // Mark audio as played
+          audio.play().catch(function (err) {
+            console.error("Autoplay failed:", err.message);
+          });
+          window.removeEventListener("scroll", playAudioOnScroll); // Remove listener
+        }
+      }
+    
+      // Attach the scroll event listener
+      window.addEventListener("scroll", playAudioOnScroll);
+    
+      // Workaround: Bind an initial interaction like a click or keypress to prepare the audio
+      document.body.addEventListener("click", () => audio.play(), { once: true });
+      document.body.addEventListener("keypress", () => audio.play(), { once: true });
     </script>
+    
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
