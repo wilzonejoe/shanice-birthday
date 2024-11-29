@@ -111,13 +111,13 @@ function MainPage() {
             onClick={() => handleButtonClick('wishes')}
             active={activeButton === 'wishes'} // Highlight if active
           >
-            See Our Wishes
+            Our Wishes
           </Button>
           <Button
             onClick={() => handleButtonClick('gallery')}
             active={activeButton === 'gallery'} // Highlight if active
           >
-            See Our Pictures
+            Our Pictures
           </Button>
         </ButtonsContainer>
       </HeaderContainer>
