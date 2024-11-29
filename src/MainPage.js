@@ -6,7 +6,7 @@ import ImagesGallery from './components/ImagesGallery';
 
 // Styled-components for header, app bar, and section titles
 const Container = styled.header`
-  background-color: #F5F5DC;
+  background-color: #BC9E82;
 `;
 
 const HeaderContainer = styled.header`
