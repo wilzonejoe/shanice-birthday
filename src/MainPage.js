@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Papa from 'papaparse';
 import styled from 'styled-components';
 import WishesGallery from './components/WishesGallery';
@@ -31,26 +31,39 @@ const NavLink = styled.a`
   }
 `;
 
-
 const HeaderContainer = styled.header`
   position: relative;
   height: 100vh;
-  background-image: url('/background.jpg');
+  background-color: #F5F5DC;
   background-position: center;
   background-attachment: fixed;
   background-size: cover;
-  color: white;
+  color: #c8ae7e;
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  z-index: -1;
 `;
 
 const HeaderText = styled.h1`
   font-size: 3rem;
   font-weight: bold;
+`;
+
+const Button = styled.button`
+  background-color: #c8ae7e;
+  color: white;
+  font-size: 1.2rem;
+  padding: 15px 30px;
+  margin-top: 20px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  
+  &:hover {
+    background-color: #a89e64;
+  }
 `;
 
 const SectionTitle = styled.h2`
@@ -67,6 +80,7 @@ const Section = styled.section`
 function MainPage() {
   const [wishes, setWishes] = useState([]);
   const [images, setImages] = useState([]);
+  const audioRef = useRef(new Audio('/music.mp3'));
 
   useEffect(() => {
     fetch('/images-collection.json')
@@ -79,7 +93,6 @@ function MainPage() {
   }, []);
 
   useEffect(() => {
-    // Load the CSV and map the values
     Papa.parse('/Wish Birthday Shan” (Responses) - Form responses 1.csv', {
       download: true,
       header: true,
@@ -93,17 +106,21 @@ function MainPage() {
     });
   }, []);
 
+  const handleButtonClick = () => {
+    // Scroll to wishes section
+    document.getElementById('wishes').scrollIntoView({ behavior: 'smooth' });
+
+    // Play the audio
+    audioRef.current.play();
+  };
+
   return (
     <div>
-      {/* Navigation Bar */}
-      <Navbar>
-        <NavLink href="#wishes">Wishes</NavLink>
-        <NavLink href="#gallery">Gallery</NavLink>
-      </Navbar>
-
       {/* Parallax Header */}
       <HeaderContainer>
         <HeaderText>Happy Birthday Shanice!</HeaderText>
+        {/* Button to scroll to wishes and play music */}
+        <Button onClick={handleButtonClick}>See Wishes</Button>
       </HeaderContainer>
       
       {/* Wishes Section */}
