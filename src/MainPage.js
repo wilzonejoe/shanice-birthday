@@ -5,38 +5,15 @@ import WishesGallery from './components/WishesGallery';
 import ImagesGallery from './components/ImagesGallery';
 
 // Styled-components for header, app bar, and section titles
-const Navbar = styled.nav`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-  color: white;
-  padding: 10px 20px;
-  z-index: 1000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const NavLink = styled.a`
-  color: white;
-  text-decoration: none;
-  margin: 0 20px;
-  font-size: 1.2rem;
-  cursor: pointer;
-
-  &:hover {
-    text-decoration: underline;
-  }
+const Container = styled.header`
+  background-color: #F5F5DC;
 `;
 
 const HeaderContainer = styled.header`
   position: relative;
   height: 100vh;
-  background-color: #F5F5DC;
+  background-image: url('/background.PNG');
   background-position: center;
-  background-attachment: fixed;
   background-size: cover;
   color: #c8ae7e;
   text-align: center;
@@ -46,23 +23,26 @@ const HeaderContainer = styled.header`
   flex-direction: column;
 `;
 
-const HeaderText = styled.h1`
-  font-size: 3rem;
-  font-weight: bold;
+const ButtonsContainer = styled.div`
+  position: absolute;
+  bottom: 20px; /* Align the buttons 20px above the bottom */
+  display: flex;
+  gap: 20px; /* Space between the buttons */
 `;
 
 const Button = styled.button`
-  background-color: #c8ae7e;
-  color: white;
-  font-size: 1.2rem;
-  padding: 15px 30px;
-  margin-top: 20px;
-  cursor: pointer;
+  background-color: ${props => (props.active ? '#4B392F' : '#604C3E')}; /* Highlight when active */
+  color: #FFFFFF; /* White text */
+  padding: 12px 20px;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
   
   &:hover {
-    background-color: #a89e64;
+    background-color: #4B392F; /* Darken on hover */
   }
 `;
 
@@ -80,6 +60,7 @@ const Section = styled.section`
 function MainPage() {
   const [wishes, setWishes] = useState([]);
   const [images, setImages] = useState([]);
+  const [activeButton, setActiveButton] = useState(null); // Track active button state
   const audioRef = useRef(new Audio('/music.mp3'));
 
   useEffect(() => {
@@ -93,34 +74,52 @@ function MainPage() {
   }, []);
 
   useEffect(() => {
-    Papa.parse('/Wish Birthday Shan” (Responses) - Form responses 1.csv', {
+    Papa.parse('/Wishes.csv', {
       download: true,
       header: true,
       complete: (result) => {
         const mappedWishes = result.data.map((item) => ({
-          name: item["Nama panggilan (yang bisa dikenali Shanice yaa)"],
-          text: item["Wish buat Shan”"],
+          name: item["Name"],
+          text: item["Wish"],
         }));
         setWishes(mappedWishes);
       },
     });
   }, []);
 
-  const handleButtonClick = () => {
-    // Scroll to wishes section
-    document.getElementById('wishes').scrollIntoView({ behavior: 'smooth' });
+  const handleButtonClick = (buttonType) => {
+    setActiveButton(buttonType); // Set active button
+
+    // Scroll to the appropriate section based on the button clicked
+    if (buttonType === 'wishes') {
+      document.getElementById('wishes').scrollIntoView({ behavior: 'smooth' });
+    } else if (buttonType === 'gallery') {
+      document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' });
+    }
 
     // Play the audio
     audioRef.current.play();
   };
 
   return (
-    <div>
+    <Container>
       {/* Parallax Header */}
       <HeaderContainer>
-        <HeaderText>Happy Birthday Shanice!</HeaderText>
-        {/* Button to scroll to wishes and play music */}
-        <Button onClick={handleButtonClick}>See Wishes</Button>
+        {/* Buttons aligned side by side */}
+        <ButtonsContainer>
+          <Button
+            onClick={() => handleButtonClick('wishes')}
+            active={activeButton === 'wishes'} // Highlight if active
+          >
+            See Our Wishes
+          </Button>
+          <Button
+            onClick={() => handleButtonClick('gallery')}
+            active={activeButton === 'gallery'} // Highlight if active
+          >
+            See Our Pictures
+          </Button>
+        </ButtonsContainer>
       </HeaderContainer>
       
       {/* Wishes Section */}
@@ -134,7 +133,7 @@ function MainPage() {
         <SectionTitle>Gallery</SectionTitle>
         <ImagesGallery images={images} />
       </Section>
-    </div>
+    </Container>
   );
 }
 
